@@ -52,13 +52,15 @@ console.log('JS Connected')
 
 // dynamic elements
 
+let tasks = JSON.parse(localStorage.getItem("tasks")) || []   //pasre - string to array
+
 const taskip = document.getElementById('taskip')
 const addbtn = document.getElementById('addbtn')
 const tasklist = document.getElementById('tasklist')
 
-addbtn.addEventListener('click', () => {
 
-    const task = taskip.value.trim()
+// ui making reusable func
+function addTask(task){
 
     //task elem
     const li = document.createElement('li')
@@ -81,25 +83,41 @@ addbtn.addEventListener('click', () => {
     const deletebtn = document.createElement('button')
     deletebtn.textContent = 'Delete'
     deletebtn.classList.add("deletebtn");
-    
     deletebtn.addEventListener('click', (e) => {
         e.stopPropagation();
+        tasks = tasks.filter((t) => t !== task);
+        localStorage.setItem("tasks", JSON.stringify(tasks));
         li.remove()
         taskip.focus()
     })
-
-    if (task == '') {
-        alert('Please enter a task')
-        return
-    }
-
+    
+    // adding to li
     li.prepend(checkbox);
     li.appendChild(deletebtn)
     tasklist.appendChild(li)
 
-    taskip.value = ''
+}
 
-    taskip.focus()
+addbtn.addEventListener('click', () => {
+
+    const task = taskip.value.trim()
+    
+        if (task == '') {
+            alert('Please enter a task')
+            return
+        }
+    
+        tasks.push(task);  //adding into array
+
+        localStorage.setItem('tasks', JSON.stringify(tasks))  //storing in local storage    //json - array to string
+
+        // console.log(tasks); //to check
+
+    addTask(task)
+
+    taskip.value = '' //clearing ip box
+
+    taskip.focus()  // ip box pe focus after adding
 
 })
 
@@ -110,3 +128,11 @@ taskip.addEventListener('keydown', (e) => {
 
     }
 })  
+
+// day 2
+
+//render saved tasks
+tasks.forEach((task) => {
+    addTask(task)
+});
+

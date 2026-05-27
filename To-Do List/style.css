@@ -119,8 +119,13 @@ input[type="checkbox"]{
 
 li{
     transition: 0.2s;
+    /* text-align: left; */
 }
 
 li:hover{
     background-color: #333;
 }
+
+
+/* day 2 */
+
