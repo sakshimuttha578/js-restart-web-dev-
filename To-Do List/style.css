@@ -127,5 +127,21 @@ li:hover{
 }
 
 
-/* day 2 */
+/* day 3 - making responsive */
+
+@media (max-width: 600px){
+
+    .ip-container{
+        flex-direction: column;
+    }
+
+    #addbtn{
+        width: 100%;
+    }
+
+    .todo-container{
+        width: 90%;
+        padding: 20px;
+    }
+}
 

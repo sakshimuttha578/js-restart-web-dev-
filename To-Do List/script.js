@@ -85,7 +85,7 @@ function addTask(task){
     deletebtn.classList.add("deletebtn");
     deletebtn.addEventListener('click', (e) => {
         e.stopPropagation();
-        tasks = tasks.filter((t) => t !== task);
+        tasks = tasks.filter((t) => t !== task);   //removing deleted items from array and UI as well
         localStorage.setItem("tasks", JSON.stringify(tasks));
         li.remove()
         taskip.focus()
